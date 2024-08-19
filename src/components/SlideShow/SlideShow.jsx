@@ -16,12 +16,12 @@ export default function SlideShow() {
        <StyledCarouselItem >
         <MainWeather/>
       </StyledCarouselItem>
-      <StyledCarouselItem>
+      {/* <StyledCarouselItem>
 
       </StyledCarouselItem>
       <StyledCarouselItem>
-        
-      </StyledCarouselItem>
+
+      </StyledCarouselItem> */}
     </Carousel>
   )
 }
