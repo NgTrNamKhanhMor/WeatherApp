@@ -1,8 +1,7 @@
 import Carousel from 'react-bootstrap/Carousel';
 import MainWeather from '../MainWeather/MainWeather';
 import { useState } from 'react';
-import FiveHours from '../FiveHours/FiveHours';
-import FiveDays from '../FiveDays/FiveDays';
+import { StyledCarouselItem } from '../CarouselItem/CarouselItem.style';
 
 export default function SlideShow() {
 
@@ -13,16 +12,16 @@ export default function SlideShow() {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} data-bs-theme="dark">
-       <Carousel.Item >
+    <Carousel activeIndex={index} onSelect={handleSelect} data-bs-theme="dark" className='py-5'>
+       <StyledCarouselItem >
         <MainWeather/>
-      </Carousel.Item>
-      <Carousel.Item>
-          <FiveHours/>
-      </Carousel.Item>
-      <Carousel.Item>
-        <FiveDays/>
-      </Carousel.Item>
+      </StyledCarouselItem>
+      <StyledCarouselItem>
+
+      </StyledCarouselItem>
+      <StyledCarouselItem>
+        
+      </StyledCarouselItem>
     </Carousel>
   )
 }
