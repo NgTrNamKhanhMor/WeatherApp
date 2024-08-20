@@ -5,10 +5,9 @@ import { getWeatherNow } from '../../apis/weather';
 import { temperatureText } from '../../ultis/text';
 import { useEffect, useState } from 'react';
 
-export default function MainWeather() {
+export default function MainWeather({city}) {
   const [loading, setLoading] = useState(true); 
   const [weather, setWeather] = useState(null);
-  const city = "Hanoi";
 
   useEffect(() => {
     const fetchWeather = async () => {

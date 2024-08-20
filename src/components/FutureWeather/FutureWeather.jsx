@@ -2,9 +2,9 @@ import Row from 'react-bootstrap/Row';
 import WeatherItem from '../WeatherItem/WeatherItem';
 import { useEffect, useState } from 'react';
 import { getWeatherNext5Days, getWeatherNext5Hours } from '../../apis/weather';
-export default function FutureWeather({isHourly}) {
+export default function FutureWeather({isHourly, city}) {
   const [weathers, setWeather] = useState([]);
-  const city = "Hanoi"
+  
 
   useEffect(() => {
     const fetchWeather = async () => {

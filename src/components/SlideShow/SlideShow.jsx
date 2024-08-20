@@ -7,6 +7,7 @@ import FutureWeather from '../FutureWeather/FutureWeather';
 export default function SlideShow() {
 
   const [index, setIndex] = useState(0);
+  const city = "California"
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
@@ -15,13 +16,13 @@ export default function SlideShow() {
   return (
     <Carousel activeIndex={index} onSelect={handleSelect} data-bs-theme="dark" className='py-5'>
        <StyledCarouselItem >
-        <MainWeather/>
+        <MainWeather city={city}/>
       </StyledCarouselItem>
       <StyledCarouselItem >
-        <FutureWeather isHourly={true}/>
+        <FutureWeather isHourly={true} city={city}/>
       </StyledCarouselItem>
       <StyledCarouselItem >
-        <FutureWeather isHourly={false}/>
+        <FutureWeather isHourly={false} city={city}/>
       </StyledCarouselItem>
       
     </Carousel>
