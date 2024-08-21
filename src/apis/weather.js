@@ -1,7 +1,11 @@
+//libraries
 import axios from 'axios';
-import { fetchCityCoordinates } from './city';
-import { formatTimestampToDay, formatTimestampToHour } from '../ultis/text';
 
+//apis
+import { fetchCityCoordinates } from '~apis/city';
+//ultis
+import { formatTimestampToDay, formatTimestampToHour } from '~ultis/text';
+//const
 const apiUrl = import.meta.env.VITE_OPENWEATHER_API_URL;
 const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
 const imgURL = import.meta.env.VITE_OPENWEATHER_IMG_API_URL;
@@ -27,7 +31,7 @@ export async function getWeatherNow(city) {
 }
 
 export async function getWeatherNext5Hours(city) {
-    try{
+    try {
         const { lat, lon } = await fetchCityCoordinates(city);
         const weatherApiUrl = `${apiUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
         const response = await axios.get(weatherApiUrl);
@@ -41,16 +45,16 @@ export async function getWeatherNext5Hours(city) {
                 iconUrl: `${imgURL}/img/wn/${data.list[i].weather[0].icon}@2x.png`,
                 time: formatTimestampToHour(data.list[i].dt)
             });
-        } 
+        }
         return next5Hours;
-    }catch (error){
+    } catch (error) {
         console.error("Error fetching weather data:", error);
     }
-    
+
 }
 
 export async function getWeatherNext5Days(city) {
-    try{
+    try {
         const { lat, lon } = await fetchCityCoordinates(city);
         const weatherApiUrl = `${apiUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
         const response = await axios.get(weatherApiUrl);
@@ -71,12 +75,12 @@ export async function getWeatherNext5Days(city) {
                     day: day,
                 });
             }
-        } 
+        }
         return next5Days;
-    }catch (error){
+    } catch (error) {
         console.error("Error fetching weather data:", error);
     }
-    
+
 }
 
 

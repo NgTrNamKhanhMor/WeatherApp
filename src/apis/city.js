@@ -1,5 +1,6 @@
+//libraries
 import axios from 'axios';
-
+//const
 const apiUrl = import.meta.env.VITE_OPENWEATHER_API_URL;
 const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
