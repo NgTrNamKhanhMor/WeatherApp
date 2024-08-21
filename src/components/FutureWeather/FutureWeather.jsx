@@ -1,13 +1,11 @@
+//React
+import { useEffect, useState } from "react";
+import { getWeatherNextDays, getWeatherNextHours } from "~apis/weather";
 //Libraries
 import Row from "react-bootstrap/Row";
 
 //Components
-import WeatherItem from "/WeatherItem/WeatherItem";
-
-//Hooks
-import { useEffect, useState } from "react";
-//APIs
-import { getWeatherNext5Days, getWeatherNext5Hours } from "~apis/weather";
+import WeatherItem from "~components/WeatherItem/WeatherItem";
 
 export default function FutureWeather({ isHourly, city }) {
   const [weathers, setWeather] = useState([]);
@@ -15,8 +13,8 @@ export default function FutureWeather({ isHourly, city }) {
   useEffect(() => {
     const fetchWeather = async () => {
       const weatherData = isHourly
-        ? await getWeatherNext5Hours(city)
-        : await getWeatherNext5Days(city);
+        ? await getWeatherNextHours(city)
+        : await getWeatherNextDays(city);
 
       setWeather(weatherData);
     };

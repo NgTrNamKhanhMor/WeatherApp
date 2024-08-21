@@ -9,7 +9,7 @@ import FutureWeather from "~components/FutureWeather/FutureWeather";
 
 export default function SlideShow() {
   const [index, setIndex] = useState(0);
-  const city = "New York";
+  const CITY = "New York";
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
@@ -23,13 +23,13 @@ export default function SlideShow() {
       className="py-5"
     >
       <StyledCarouselItem>
-        <MainWeather city={city} />
+        <MainWeather city={CITY} />
       </StyledCarouselItem>
       <StyledCarouselItem>
-        <FutureWeather isHourly={true} city={city} />
+        <FutureWeather isHourly={true} city={CITY} />
       </StyledCarouselItem>
       <StyledCarouselItem>
-        <FutureWeather isHourly={false} city={city} />
+        <FutureWeather isHourly={false} city={CITY} />
       </StyledCarouselItem>
     </Carousel>
   );

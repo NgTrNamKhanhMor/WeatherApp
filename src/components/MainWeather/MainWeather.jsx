@@ -1,13 +1,12 @@
+//React
+import { useEffect, useState } from "react";
+import { temperatureText } from "~ultis/text";
+import { getWeatherNow } from "~apis/weather";
+
 //Libraries
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-//APIs
-import { getWeatherNow } from "~apis/weather";
-//Ultis
-import { temperatureText } from "~ultis/text";
-//Hooks
-import { useEffect, useState } from "react";
 
 export default function MainWeather({ city }) {
   const [loading, setLoading] = useState(true);
@@ -34,10 +33,7 @@ export default function MainWeather({ city }) {
           <p>Loading weather data...</p>
         </Container>
       ) : (
-        <Container
-          className="d-flex justify-content-center align-items-center"
-          style={{ height: "100%" }}
-        >
+        <Container className="d-flex justify-content-center align-items-center h-100">
           <Row className="w-100">
             <Col
               lg={3}

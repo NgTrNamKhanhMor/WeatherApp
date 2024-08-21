@@ -1,7 +1,7 @@
+//React
+import { parseTimeString, temperatureText } from "~ultis/text";
 //Libraries
 import Col from "react-bootstrap/Col";
-//Ultis
-import { parseTimeString, temperatureText } from "~ultis/text";
 
 function WeatherItem({ weather, isHourly }) {
   return (

@@ -1,27 +1,28 @@
+//React
+import { fetchCityCoordinates } from '~apis/city';
+import { formatTimestampToDay, formatTimestampToHour } from '~ultis/text';
 //libraries
 import axios from 'axios';
 
-//apis
-import { fetchCityCoordinates } from '~apis/city';
-//ultis
-import { formatTimestampToDay, formatTimestampToHour } from '~ultis/text';
 //const
-const apiUrl = import.meta.env.VITE_OPENWEATHER_API_URL;
-const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
-const imgURL = import.meta.env.VITE_OPENWEATHER_IMG_API_URL;
+const APIURL = import.meta.env.VITE_OPENWEATHER_API_URL;
+const APIKEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+const IMGURL = import.meta.env.VITE_OPENWEATHER_IMG_API_URL;
+const FUTUREDAYS = 5;
+const FUTUREHOURS = 5;
 
 export async function getWeatherNow(city) {
     try {
         const { lat, lon, country } = await fetchCityCoordinates(city);
 
-        const weatherApiUrl = `${apiUrl}/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-        const response = await axios.get(weatherApiUrl);
+        const weatherAPIURL = `${APIURL}/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=metric`;
+        const response = await axios.get(weatherAPIURL);
 
         const data = response.data;
         const weatherNow = {
             temp: data.main.temp,
             location: `${city}, ${country}`,
-            iconUrl: `${imgURL}/img/wn/${data.weather[0].icon}@2x.png`,
+            iconUrl: `${IMGURL}/img/wn/${data.weather[0].icon}@2x.png`,
         };
 
         return weatherNow;
@@ -30,53 +31,53 @@ export async function getWeatherNow(city) {
     }
 }
 
-export async function getWeatherNext5Hours(city) {
+export async function getWeatherNextHours(city) {
     try {
         const { lat, lon } = await fetchCityCoordinates(city);
-        const weatherApiUrl = `${apiUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-        const response = await axios.get(weatherApiUrl);
+        const weatherAPIURL = `${APIURL}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=metric`;
+        const response = await axios.get(weatherAPIURL);
 
         const data = response.data;
 
-        const next5Hours = [];
-        for (let i = 0; i < 5; i++) {
-            next5Hours.push({
+        const nextHours = [];
+        for (let i = 0; i < FUTUREHOURS; i++) {
+            nextHours.push({
                 temp: data.list[i].main.temp,
-                iconUrl: `${imgURL}/img/wn/${data.list[i].weather[0].icon}@2x.png`,
+                iconUrl: `${IMGURL}/img/wn/${data.list[i].weather[0].icon}@2x.png`,
                 time: formatTimestampToHour(data.list[i].dt)
             });
         }
-        return next5Hours;
+        return nextHours;
     } catch (error) {
         console.error("Error fetching weather data:", error);
     }
 
 }
 
-export async function getWeatherNext5Days(city) {
+export async function getWeatherNextDays(city) {
     try {
         const { lat, lon } = await fetchCityCoordinates(city);
-        const weatherApiUrl = `${apiUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-        const response = await axios.get(weatherApiUrl);
+        const weatherAPIURL = `${APIURL}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=metric`;
+        const response = await axios.get(weatherAPIURL);
 
         const data = response.data;
 
-        const next5Days = [];
+        const nextDays = [];
         let lastDay = '';
         let dayCount = 0;
         for (let i = 0; i < data.list.length; i++) {
             const day = formatTimestampToDay(data.list[i].dt);
-            if (day !== lastDay && dayCount < 5) {
+            if (day !== lastDay && dayCount < FUTUREDAYS) {
                 lastDay = day;
                 dayCount++;
-                next5Days.push({
+                nextDays.push({
                     temp: data.list[i].main.temp,
-                    iconUrl: `${imgURL}/img/wn/${data.list[i].weather[0].icon}@2x.png`,
+                    iconUrl: `${IMGURL}/img/wn/${data.list[i].weather[0].icon}@2x.png`,
                     day: day,
                 });
             }
         }
-        return next5Days;
+        return nextDays;
     } catch (error) {
         console.error("Error fetching weather data:", error);
     }
