@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "~apis/*": [
+                "src/apis/*"
+            ],
+            "~assets/*": [
+                "src/assets/*"
+            ],
+            "~components/*": [
+                "src/components/*"
+            ],
+            "~ultis/*": [
+                "src/ultis/*"
+            ],
+            "~/*": [
+                "src/*"
+            ]
+        }
+    }
+}
