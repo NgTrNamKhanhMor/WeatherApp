@@ -1,3 +1,3 @@
-import { StyledCarouselItem } from "./CarouselItem.styles";
+import { StyledCarouselItem } from "~components/CarouselItem/CarouselItem.style";
 
 export default StyledCarouselItem
